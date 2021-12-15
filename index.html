@@ -1097,13 +1097,11 @@
         <div class="sc-bdfBwQ sc-gsTCUz bcrzgk bhdLno">
             <div class="sc-bdfBwQ LyLIy">
                 <div class="sc-bdfBwQ fDCose">
-                    <video playsinline="true" loop="true" muted="true" autoplay="true"
+                    <video id="video-back" playsinline="true" loop="true" muted="true"
                            poster="/static/background_large.jpeg"
                            preload="auto"
-                           src="/static/background_video_lg.mp4"
+                           autoplay="true"
                            class="StyledProfileBackground__StyledVideo-sc-1uifkkg-1 UknVR">
-                        <source src="/static/background_video_lg.mp4"
-                                type="video/mp4"/>
                     </video>
                 </div>
                 <div class="sc-bdfBwQ eZNKTD">
@@ -1199,5 +1197,17 @@
         </div>
     </div>
 </div>
+<script>
+    function preloadVideo(src) {
+        return fetch(src)
+            .then(res => res.blob())
+            .then(blob => URL.createObjectURL(blob));
+    }
+
+    preloadVideo("/static/background_video_lg.mp4").then(src => {
+        const videoTag = document.getElementById("video-back");
+        videoTag.src = src;
+    });
+</script>
 </body>
 </html>
